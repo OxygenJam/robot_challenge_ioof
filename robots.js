@@ -28,7 +28,11 @@ class Robot {
     constructor(x = 0, y = 0, f = "NORTH") {
         this.x = x;
         this.y = y;
-        this.face = f
+        if(CARDINALS.indexOf(f.toLocaleUpperCase()) === -1){
+            // Any invalid cardinals are default NORTH
+            f = "NORTH";
+        }
+        this.face = f.toLocaleUpperCase();
     }
 
     /**
@@ -169,7 +173,7 @@ class Table {
         }
 
         const rbts = `There are ${this.robotsInTable.length} robot(s) currently in the table`;
-        const rbtRep = this.actvRbt[0].report();
+        const rbtRep = this.actvRbt[0].report() + ` >> ROBOT ${this.actvRbt[1]}`;
 
         console.log(rbts);
         console.log(rbtRep);
